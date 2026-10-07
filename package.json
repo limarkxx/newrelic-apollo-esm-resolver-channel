@@ -1,0 +1,18 @@
+{
+  "name": "newrelic-apollo-esm-resolver-channel",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Reproduction: New Relic Node agent wires the ESM Apollo Server wrapField hook to the nr_processRequest channel, so resolver instrumentation never fires under ESM",
+  "scripts": {
+    "esm": "node --import newrelic/esm-loader.mjs -r newrelic app.mjs",
+    "cjs": "node -r newrelic app.cjs",
+    "esm:patched": "node --import ./patched-esm-loader.mjs -r newrelic app.mjs",
+    "all": "npm run -s cjs && npm run -s esm && npm run -s esm:patched"
+  },
+  "dependencies": {
+    "@apollo/server": "^4.13.0",
+    "graphql": "^16.12.0",
+    "newrelic": "^14.5.1"
+  }
+}
